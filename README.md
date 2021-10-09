@@ -57,5 +57,5 @@ optional arguments:
 Example:
 
 ```bash
-INFLUX_USERNAME=myupway INFLUX_PASSWORD=myupway python3 store_influxdb.py --host 10.110.1.6
+cat examples/metrics.json | INFLUX_USERNAME=myupway INFLUX_PASSWORD=myupway python3 store_influxdb.py --host 10.110.1.6
 ```
