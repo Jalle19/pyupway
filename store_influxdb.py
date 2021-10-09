@@ -20,13 +20,8 @@ if __name__ == "__main__":
     system_id = metrics["system_id"]
 
     # Build tag and field set
-    tags = {
-        "system_id": system_id
-    }
-
-    fields = {
-
-    }
+    tags = {"system_id": system_id}
+    fields = {}
 
     # Add one field per definition,
     for definition_group_name in metrics["metrics"]:
