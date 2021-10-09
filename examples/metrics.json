@@ -1,0 +1,319 @@
+{
+    "system_id": 131689,
+    "metrics": {
+        "tehowatti_status": {
+            "40067": {
+                "name": "avg. outdoor temp. BT1",
+                "type": "temperature",
+                "unit": "C",
+                "value": 12.4
+            },
+            "40014": {
+                "name": "hot water charging BT6",
+                "type": "temperature",
+                "unit": "C",
+                "value": 46.5
+            },
+            "40013": {
+                "name": "hot water top BT7",
+                "type": "temperature",
+                "unit": "C",
+                "value": 46.7
+            },
+            "40004": {
+                "name": "outdoor temp. BT1",
+                "type": "temperature",
+                "unit": "C",
+                "value": 12.2
+            },
+            "40083": {
+                "name": "current BE1",
+                "type": "current",
+                "unit": "A",
+                "value": 0.0
+            },
+            "40081": {
+                "name": "current BE2",
+                "type": "current",
+                "unit": "A",
+                "value": 0.0
+            },
+            "40079": {
+                "name": "current BE3",
+                "type": "current",
+                "unit": "A",
+                "value": 0.0
+            },
+            "43005": {
+                "name": "degree minutes",
+                "type": "dimensionless",
+                "unit": "DM",
+                "value": 17
+            }
+        },
+        "tehowatti_hot_water": {
+            "48132": {
+                "name": "temporary lux",
+                "type": "boolean_on_off",
+                "unit": "",
+                "value": false
+            },
+            "47041": {
+                "name": "comfort mode",
+                "type": "dimensionless",
+                "unit": "",
+                "value": "normal"
+            }
+        },
+        "tehowatti_climate_system_1": {
+            "43161": {
+                "name": "external adjustment S1",
+                "type": "boolean_yes_no",
+                "unit": "",
+                "value": false
+            },
+            "47276": {
+                "name": "floor drying function",
+                "type": "boolean_on_off",
+                "unit": "",
+                "value": false
+            },
+            "43009": {
+                "name": "calculated flow temp. S1",
+                "type": "temperature",
+                "unit": "C",
+                "value": 29.6
+            },
+            "40071": {
+                "name": "external flow temp. BT25",
+                "type": "temperature",
+                "unit": "C",
+                "value": null
+            },
+            "40008": {
+                "name": "heat medium flow BT2",
+                "type": "temperature",
+                "unit": "C",
+                "value": 29.2
+            },
+            "40012": {
+                "name": "return temp. BT3",
+                "type": "temperature",
+                "unit": "C",
+                "value": 28.7
+            },
+            "40033": {
+                "name": "room temperature BT50",
+                "type": "temperature",
+                "unit": "C",
+                "value": null
+            }
+        },
+        "tehowatti_addition": {
+            "10033": {
+                "name": "blocked",
+                "type": "boolean_yes_no",
+                "unit": "",
+                "value": true
+            },
+            "47214": {
+                "name": "fuse size",
+                "type": "current",
+                "unit": "A",
+                "value": 16.0
+            },
+            "43081": {
+                "name": "time factor",
+                "type": "time_period",
+                "unit": "h",
+                "value": 1.4
+            },
+            "43084": {
+                "name": "electrical addition power",
+                "type": "power",
+                "unit": "kW",
+                "value": 0.0
+            },
+            "47212": {
+                "name": "set max electrical add.",
+                "type": "power",
+                "unit": "kW",
+                "value": 9.0
+            },
+            "40121": {
+                "name": "addition temperature BT63",
+                "type": "temperature",
+                "unit": "C",
+                "value": 28.7
+            }
+        },
+        "tehowatti_heat_meter": {
+            "44302": {
+                "name": "cooling, compr. only.",
+                "type": "energy",
+                "unit": "kWh",
+                "value": 0.0
+            },
+            "44308": {
+                "name": "heating, compr. only.",
+                "type": "energy",
+                "unit": "kWh",
+                "value": 1129.8
+            },
+            "44300": {
+                "name": "heating, int. add. incl.",
+                "type": "energy",
+                "unit": "kWh",
+                "value": 1129.8
+            },
+            "44306": {
+                "name": "hotwater, compr. only.",
+                "type": "energy",
+                "unit": "kWh",
+                "value": 176.3
+            },
+            "44298": {
+                "name": "hw, incl. int. add",
+                "type": "energy",
+                "unit": "kWh",
+                "value": 188.2
+            },
+            "44304": {
+                "name": "pool, compr. only.",
+                "type": "energy",
+                "unit": "kWh",
+                "value": 0.0
+            },
+            "40072": {
+                "name": "flow BF1",
+                "type": "flow",
+                "unit": "l/m",
+                "value": 5.0
+            }
+        },
+        "inverter_m8_status": {
+            "44703": {
+                "name": "defrosting EB101",
+                "type": "boolean_yes_no",
+                "unit": "",
+                "value": false
+            },
+            "44396": {
+                "name": "pump speed heating medium GP1",
+                "type": "percentage",
+                "unit": "%",
+                "value": 30
+            },
+            "44362": {
+                "name": " outdoor temp. EB101-BT28",
+                "type": "temperature",
+                "unit": "C",
+                "value": 11.0
+            }
+        },
+        "inverter_m8_compressor_module": {
+            "10014": {
+                "name": "blocked",
+                "type": "boolean_yes_no",
+                "unit": "",
+                "value": false
+            },
+            "44069": {
+                "name": "compressor starts EB101",
+                "type": "dimensionless",
+                "unit": "",
+                "value": "1015"
+            },
+            "44702": {
+                "name": "cpr. protection mode EB101",
+                "type": "boolean_yes_no",
+                "unit": "",
+                "value": false
+            },
+            "44058": {
+                "name": "condenser out EB101-BT12",
+                "type": "temperature",
+                "unit": "C",
+                "value": 28.5
+            },
+            "44363": {
+                "name": "evaporator EB101-BT16",
+                "type": "temperature",
+                "unit": "C",
+                "value": 11.9
+            },
+            "44059": {
+                "name": "hot gas EB101-BT14",
+                "type": "temperature",
+                "unit": "C",
+                "value": 37.0
+            },
+            "44060": {
+                "name": "liquid line EB101-BT15",
+                "type": "temperature",
+                "unit": "C",
+                "value": 26.1
+            },
+            "44055": {
+                "name": "return temp. EB101-BT3",
+                "type": "temperature",
+                "unit": "C",
+                "value": 28.7
+            },
+            "44061": {
+                "name": "suction gas EB101-BT17",
+                "type": "temperature",
+                "unit": "C",
+                "value": 28.0
+            },
+            "44699": {
+                "name": "high pressure sensor EB101",
+                "type": "pressure",
+                "unit": "bar",
+                "value": 16.1
+            },
+            "44700": {
+                "name": "low pressure sensor EB101",
+                "type": "pressure",
+                "unit": "bar",
+                "value": 9.9
+            },
+            "44071": {
+                "name": "compressor operating time EB101",
+                "type": "time_period",
+                "unit": "h",
+                "value": 554.0
+            },
+            "44073": {
+                "name": "compressor operating time hot water EB101",
+                "type": "time_period",
+                "unit": "h",
+                "value": 64.0
+            },
+            "40737": {
+                "name": "compressor run time cooling EB101",
+                "type": "time_period",
+                "unit": "h",
+                "value": 0.0
+            },
+            "44701": {
+                "name": "current compr. frequency EB101",
+                "type": "frequency",
+                "unit": "Hz",
+                "value": 0
+            },
+            "40782": {
+                "name": "requested compressor freq EB101",
+                "type": "frequency",
+                "unit": "Hz",
+                "value": 0
+            },
+            "40001": {
+                "name": "test",
+                "type": "frequency",
+                "unit": "Hz",
+                "value": null
+            }
+        }
+    }
+}
