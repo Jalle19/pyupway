@@ -1,30 +1,30 @@
 {
-    "system_id": 131689,
+    "system_id": 123456,
     "metrics": {
         "tehowatti_status": {
             "40067": {
                 "name": "avg. outdoor temp. BT1",
                 "type": "temperature",
                 "unit": "C",
-                "value": 12.4
+                "value": 12.3
             },
             "40014": {
                 "name": "hot water charging BT6",
                 "type": "temperature",
                 "unit": "C",
-                "value": 46.5
+                "value": 45.5
             },
             "40013": {
                 "name": "hot water top BT7",
                 "type": "temperature",
                 "unit": "C",
-                "value": 46.7
+                "value": 46.2
             },
             "40004": {
                 "name": "outdoor temp. BT1",
                 "type": "temperature",
                 "unit": "C",
-                "value": 12.2
+                "value": 11.7
             },
             "40083": {
                 "name": "current BE1",
@@ -48,7 +48,7 @@
                 "name": "degree minutes",
                 "type": "dimensionless",
                 "unit": "DM",
-                "value": 17
+                "value": -2
             }
         },
         "tehowatti_hot_water": {
@@ -82,7 +82,7 @@
                 "name": "calculated flow temp. S1",
                 "type": "temperature",
                 "unit": "C",
-                "value": 29.6
+                "value": 30.1
             },
             "40071": {
                 "name": "external flow temp. BT25",
@@ -94,13 +94,13 @@
                 "name": "heat medium flow BT2",
                 "type": "temperature",
                 "unit": "C",
-                "value": 29.2
+                "value": 34.2
             },
             "40012": {
                 "name": "return temp. BT3",
                 "type": "temperature",
                 "unit": "C",
-                "value": 28.7
+                "value": 30.2
             },
             "40033": {
                 "name": "room temperature BT50",
@@ -144,7 +144,7 @@
                 "name": "addition temperature BT63",
                 "type": "temperature",
                 "unit": "C",
-                "value": 28.7
+                "value": 34.2
             }
         },
         "tehowatti_heat_meter": {
@@ -158,13 +158,13 @@
                 "name": "heating, compr. only.",
                 "type": "energy",
                 "unit": "kWh",
-                "value": 1129.8
+                "value": 1130.6
             },
             "44300": {
                 "name": "heating, int. add. incl.",
                 "type": "energy",
                 "unit": "kWh",
-                "value": 1129.8
+                "value": 1130.6
             },
             "44306": {
                 "name": "hotwater, compr. only.",
@@ -202,10 +202,10 @@
                 "name": "pump speed heating medium GP1",
                 "type": "percentage",
                 "unit": "%",
-                "value": 30
+                "value": 64
             },
             "44362": {
-                "name": " outdoor temp. EB101-BT28",
+                "name": "outdoor temp. EB101-BT28",
                 "type": "temperature",
                 "unit": "C",
                 "value": 11.0
@@ -222,7 +222,7 @@
                 "name": "compressor starts EB101",
                 "type": "dimensionless",
                 "unit": "",
-                "value": "1015"
+                "value": "1016"
             },
             "44702": {
                 "name": "cpr. protection mode EB101",
@@ -234,55 +234,55 @@
                 "name": "condenser out EB101-BT12",
                 "type": "temperature",
                 "unit": "C",
-                "value": 28.5
+                "value": 34.2
             },
             "44363": {
                 "name": "evaporator EB101-BT16",
                 "type": "temperature",
                 "unit": "C",
-                "value": 11.9
+                "value": 7.7
             },
             "44059": {
                 "name": "hot gas EB101-BT14",
                 "type": "temperature",
                 "unit": "C",
-                "value": 37.0
+                "value": 59.0
             },
             "44060": {
                 "name": "liquid line EB101-BT15",
                 "type": "temperature",
                 "unit": "C",
-                "value": 26.1
+                "value": 33.2
             },
             "44055": {
                 "name": "return temp. EB101-BT3",
                 "type": "temperature",
                 "unit": "C",
-                "value": 28.7
+                "value": 30.7
             },
             "44061": {
                 "name": "suction gas EB101-BT17",
                 "type": "temperature",
                 "unit": "C",
-                "value": 28.0
+                "value": 13.5
             },
             "44699": {
                 "name": "high pressure sensor EB101",
                 "type": "pressure",
                 "unit": "bar",
-                "value": 16.1
+                "value": 19.2
             },
             "44700": {
                 "name": "low pressure sensor EB101",
                 "type": "pressure",
                 "unit": "bar",
-                "value": 9.9
+                "value": 7.9
             },
             "44071": {
                 "name": "compressor operating time EB101",
                 "type": "time_period",
                 "unit": "h",
-                "value": 554.0
+                "value": 555.0
             },
             "44073": {
                 "name": "compressor operating time hot water EB101",
@@ -300,13 +300,13 @@
                 "name": "current compr. frequency EB101",
                 "type": "frequency",
                 "unit": "Hz",
-                "value": 0
+                "value": 25
             },
             "40782": {
                 "name": "requested compressor freq EB101",
                 "type": "frequency",
                 "unit": "Hz",
-                "value": 0
+                "value": 25
             },
             "40001": {
                 "name": "test",

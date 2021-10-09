@@ -75,7 +75,7 @@ definition_groups = {
     "inverter_m8_status": {
         44703: {"name": "defrosting EB101", "type": TYPE_BOOLEAN_YES_NO, "unit": UNIT_NONE},
         44396: {"name": "pump speed heating medium GP1", "type": TYPE_PERCENTAGE, "unit": UNIT_PERCENT},
-        44362: {"name": " outdoor temp. EB101-BT28", "type": TYPE_TEMPERATURE, "unit": UNIT_CELSIUS},
+        44362: {"name": "outdoor temp. EB101-BT28", "type": TYPE_TEMPERATURE, "unit": UNIT_CELSIUS},
     },
     "inverter_m8_compressor_module": {
         10014: {"name": "blocked", "type": TYPE_BOOLEAN_YES_NO, "unit": UNIT_NONE},
