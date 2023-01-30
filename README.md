@@ -7,7 +7,7 @@ myUpway. The metrics can be ingested into InfluxDB.
 
 * Python 3.8 (may work with older versions)
 
-## Installation
+## Installation (when needed)
 
 ```bash
 pip3 install -r requirements.txt
@@ -16,23 +16,28 @@ pip3 install -r requirements.txt
 ## get_metrics.py
 
 Fetches all available metrics from myUpway and outputs them as JSON.
+Also fetch individual values and output them directly or in CSV format
 
 Usage:
 
 ```bash
 $ python3 get_metrics.py --help
-usage: get_metrics.py [-h] [-s SYSTEM_ID]
+usage: get_metrics.py [-h] [-s SYSTEM_ID] [-p] [-c n [n ...]]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -s SYSTEM_ID, --system_id SYSTEM_ID
                         The system/heat pump ID
+  -p, --prefix          Prefix value with time; id; field name in CSV format
+  -c n [n ...], --currvar n [n ...]
+                        The system variables requested
 ```
 
 Example:
 
 ```bash
 EMAIL=user@example.com PASSWORD=password python3 get_metrics.py --system_id 123456
+EMAIL=user@example.com PASSWORD=password python3 get_metrics.py --system_id 123456 --prefix --currvar 44300 44298 44396
 ```
 
 Example output can be found in [examples/metrics.json](examples/metrics.json).
