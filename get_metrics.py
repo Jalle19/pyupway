@@ -82,8 +82,8 @@ definition_groups = {
     },
     "smart_price_adaptation": {
         44896: {"name": "heating", "type": TYPE_DIMENSIONLESS, "unit": UNIT_NONE},
-        44897: {"name": "hotwater", "type": TYPE_DIMENSIONLESS, "unit": UNIT_NONE},
-        44908: {"name": "hotwater", "type": TYPE_DIMENSIONLESS, "unit": UNIT_NONE},
+        44897: {"name": "hot water", "type": TYPE_DIMENSIONLESS, "unit": UNIT_NONE},
+        44908: {"name": "status", "type": TYPE_DIMENSIONLESS, "unit": UNIT_NONE},
         10069: {"name": "price of electricity", "type": TYPE_CURRENCY, "unit": UNIT_CURRENCY},
 
     },
