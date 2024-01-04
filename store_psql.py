@@ -60,7 +60,16 @@ system_id                                   bigint not null,
 "tehowatti addition blocked"                boolean,
 "inverter m8 compressor module blocked"     boolean,
 "test"                                      integer
-)
+);
+
+-- optional
+CREATE TABLE sample_metadata(
+id                                          serial not null primary key,
+measurement_id                              serial not null references measurement(id),
+definition_group                            varchar(256) not null,
+system_offline                              boolean not null,
+sample_timestamp                            timestamp with time zone not null
+);
 '''
 
 # map duplicate measurement headers to separate columns
@@ -68,6 +77,31 @@ column_mapping = {
     "10033": "tehowatti addition blocked",
     "10014": "inverter m8 compressor module blocked"
 }
+
+
+def get_column_insert_definitions(columns):
+    column_str = ','.join(map(lambda col: '"%s"' % col.replace('"','""'), columns))
+    value_format_str = ','.join(map(lambda col: '%s', columns))
+
+    return (column_str, value_format_str)
+
+
+def insert_sample_metadata(cursor, measurement_id, metadata):
+    for definition_group_name in metadata:
+        definition_group = metadata[definition_group_name]
+
+        # Build values to be inserted
+        columns = ["measurement_id", "definition_group"]
+        values = [measurement_id, definition_group_name]
+
+        for key, value in definition_group.items():
+            columns.append(key)
+            values.append(value)
+
+        (column_str, value_format_str) = get_column_insert_definitions(columns)
+
+        cursor.execute("INSERT INTO sample_metadata (%s) VALUES (%s)" % (column_str, value_format_str),
+            tuple(values))
 
 
 if __name__ == "__main__":
@@ -108,11 +142,23 @@ if __name__ == "__main__":
             else:
                 print("Warning: unsupported column \"%s\"" % (column_name))
 
-    column_str = ','.join(map(lambda col: '"%s"' % col.replace('"','""'), columns))
-    value_format_str = ','.join(map(lambda col: '%s', columns))
+    (column_str, value_format_str) = get_column_insert_definitions(columns)
 
-    cur.execute("INSERT INTO measurement (%s) VALUES (%s)" % (column_str, value_format_str),
+    cur.execute("INSERT INTO measurement (%s) VALUES (%s) RETURNING id" % (column_str, value_format_str),
         tuple(values))
+
+    measurement_id = cur.fetchone()[0]
+
+    cur.execute("""SELECT EXISTS (
+                       SELECT FROM information_schema.tables
+                       WHERE table_schema = 'public'
+                           AND table_name = 'sample_metadata'
+                   )""")
+
+    have_sample_metadata_table = cur.fetchone()[0]
+
+    if have_sample_metadata_table and "metadata" in metrics:
+        insert_sample_metadata(cur, measurement_id, metrics["metadata"])
 
     conn.commit()
 
