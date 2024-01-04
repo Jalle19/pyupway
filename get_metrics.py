@@ -158,6 +158,9 @@ if __name__ == "__main__":
     if redirect.headers.get("Location") != f"/System/{system_id}/Status/Overview":
         raise Exception("Authentication failed")
 
+    # Set language to en to be able to get boolean values right
+    session.cookies.set("EmilLanguage", "en-GB", domain="myupway.com")
+
     # Start fetching values, one "group" at a time
     for definition_group_name in definition_groups.keys():
         definition_group = definition_groups[definition_group_name]
