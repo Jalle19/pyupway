@@ -4,6 +4,8 @@ import re
 import argparse
 import sys
 import time
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -144,6 +146,16 @@ def augment_definition_values(definition_group, values):
     return definition_group
 
 
+def get_definition_group_metadata(values):
+    def_group_metadata = {}
+    def_group_metadata["system_offline"] = values["IsOffline"]
+
+    sample_datetime = datetime.strptime(values["Date"], "%d/%m/%Y %H:%M:%S")
+    def_group_metadata["sample_timestamp"] = sample_datetime.replace(tzinfo=ZoneInfo("UTC")).isoformat()
+
+    return def_group_metadata
+
+
 def auth_successful(response):
     try:
         # The login endpoint doesn't use HTTP 4XX status codes, so we check that it
@@ -189,6 +201,8 @@ if __name__ == "__main__":
     # Set language to en to be able to get boolean values right
     session.cookies.set("EmilLanguage", "en-GB", domain="myupway.com")
 
+    metadata = {}
+
     fetch_tries = 0
     # Start fetching values, one "group" at a time
     for definition_group_name in definition_groups.keys():
@@ -209,6 +223,8 @@ if __name__ == "__main__":
                 augmented_definition_group = augment_definition_values(definition_group, values)
                 definition_groups[definition_group_name] = augmented_definition_group
 
+                # Add metadata info about definition group
+                metadata[definition_group_name] = get_definition_group_metadata(values)
             except:
                 print("Retrying fetch...", file=sys.stderr)
                 time.sleep(FETCH_RETRY_DELAY)
@@ -221,7 +237,8 @@ if __name__ == "__main__":
 
     metrics = {
         "system_id": system_id,
-        "metrics": definition_groups
+        "metrics": definition_groups,
+        "metadata": metadata
     }
 
     print(json.dumps(metrics, indent=4))
