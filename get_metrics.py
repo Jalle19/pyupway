@@ -3,8 +3,18 @@ import os
 import re
 import argparse
 import sys
+import time
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import requests
+
+# NB: the sum of all retry delays shouldn't exceed the interval at which this script is run
+AUTH_MAX_TRIES = 10
+AUTH_RETRY_DELAY = 5
+
+FETCH_MAX_TRIES = 10
+FETCH_RETRY_DELAY = 5
 
 TYPE_TEMPERATURE = "temperature"
 TYPE_CURRENT = "current"
@@ -136,6 +146,27 @@ def augment_definition_values(definition_group, values):
     return definition_group
 
 
+def get_definition_group_metadata(values):
+    def_group_metadata = {}
+    def_group_metadata["system_offline"] = values["IsOffline"]
+
+    sample_datetime = datetime.strptime(values["Date"], "%d/%m/%Y %H:%M:%S")
+    def_group_metadata["sample_timestamp"] = sample_datetime.replace(tzinfo=ZoneInfo("UTC")).isoformat()
+
+    return def_group_metadata
+
+
+def auth_successful(response):
+    try:
+        # The login endpoint doesn't use HTTP 4XX status codes, so we check that it
+        # redirects to the "returnUrl" we requested
+        redirect = response.history[-1]
+
+        return redirect.headers.get("Location") == f"/System/{system_id}/Status/Overview"
+    except:
+        return False
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--system_id", type=int, help="The system/heat pump ID")
@@ -146,36 +177,68 @@ if __name__ == "__main__":
     password = os.getenv("PASSWORD")
 
     session = requests.session()
-    auth_response = session.post("https://myupway.com/LogIn", {
-        "returnUrl": f"/System/{system_id}/Status/Overview",
-        "Email": email,
-        "Password": password
-    })
 
-    # The login endpoint doesn't use HTTP 4XX status codes, so we check that it
-    # redirects to the "returnUrl" we requested
-    redirect = auth_response.history.pop()
-    if redirect.headers.get("Location") != f"/System/{system_id}/Status/Overview":
+    auth_tries = 0
+    while auth_tries < AUTH_MAX_TRIES:
+        auth_response = session.post("https://myupway.com/LogIn", {
+            "returnUrl": f"/System/{system_id}/Status/Overview",
+            "Email": email,
+            "Password": password
+        })
+
+        if auth_successful(auth_response):
+            break
+
+        print("Retrying auth...", file=sys.stderr)
+        time.sleep(AUTH_RETRY_DELAY)
+        auth_tries += 1
+
+    if not auth_successful(auth_response):
         raise Exception("Authentication failed")
 
+    print("Authenticated", file=sys.stderr)
+
+    # Set language to en to be able to get boolean values right
+    session.cookies.set("EmilLanguage", "en-GB", domain="myupway.com")
+
+    metadata = {}
+
+    fetch_tries = 0
     # Start fetching values, one "group" at a time
     for definition_group_name in definition_groups.keys():
         definition_group = definition_groups[definition_group_name]
 
-        values_response = session.post("https://myupway.com/PrivateAPI/Values", {
-            "hpid": system_id,
-            "variables": get_definition_variables(definition_group)
-        })
+        while fetch_tries < FETCH_MAX_TRIES:
+            try:
+                values_response = session.post("https://myupway.com/PrivateAPI/Values", {
+                    "hpid": system_id,
+                    "variables": get_definition_variables(definition_group)
+                })
 
-        values = values_response.json()
+                values = values_response.json()
 
-        # Augment the definition groups with the values received
-        augmented_definition_group = augment_definition_values(definition_group, values)
-        definition_groups[definition_group_name] = augmented_definition_group
+                print("values", values, file=sys.stderr)
+
+                # Augment the definition groups with the values received
+                augmented_definition_group = augment_definition_values(definition_group, values)
+                definition_groups[definition_group_name] = augmented_definition_group
+
+                # Add metadata info about definition group
+                metadata[definition_group_name] = get_definition_group_metadata(values)
+            except:
+                print("Retrying fetch...", file=sys.stderr)
+                time.sleep(FETCH_RETRY_DELAY)
+                fetch_tries += 1
+            else:
+                break
+
+    if fetch_tries >= FETCH_MAX_TRIES:
+        raise Exception("Fetch failed")
 
     metrics = {
         "system_id": system_id,
-        "metrics": definition_groups
+        "metrics": definition_groups,
+        "metadata": metadata
     }
 
     print(json.dumps(metrics, indent=4))
